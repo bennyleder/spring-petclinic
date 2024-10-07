@@ -4,7 +4,7 @@ COPY . /usr/src/
 RUN sonar-scanner \
 -Dsonar.projectBaseDir=/usr/src \
 -Dsonar.host.url=https://172.17.0.2:9000 \
--Dsonar.exclusions =** / *. java \
+-Dsonar.exclusions =** / *.java \
 -Dsonar.token=sqp_5044acaa6b7ccfa1ff6dafba5bc6cf55dffb0d94 \
 -Dsonar.projectKey=petclinic 
 #-Dsonar.language=javascript
