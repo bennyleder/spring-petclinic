@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-mysql-deployment
+  labels:
+    app: {{ .Values.database.labels }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Values.database.labels }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.database.labels }}
+    spec:
+      containers:
+      - name: mysqldb
+        image: "{{ .Values.database.image }}:{{ .Values.database.tag }}"
+        ports:
+        - containerPort: {{ .Values.database.port }}
+        env:
+        {{- range .Values.database.env }}
+        - name: {{ .name }}
+          value: {{ .value | quote }}
+        {{- end }}

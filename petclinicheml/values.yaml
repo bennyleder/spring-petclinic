@@ -1,0 +1,31 @@
+deployment:
+  replicas: 1
+
+app:
+  image: bennylederh/petcliniclab
+  tag: latest
+  labels: petcliniclb
+  port: 8080
+
+service:
+  type: ClusterIP
+  port: 80
+  targetport: 8080
+  labels: petcliniclb
+
+database:
+  image: mysql
+  tag: 5.7
+  labels: petcliniclb
+  port: 3306
+  env:
+  - name: MYSQL_ROOT_PASSWORD
+    value: ""
+  - name: MYSQL_ALLOW_EMPTY_PASSWORD
+    value: "true"
+  - name: MYSQL_USER
+    value: "petclinic"
+  - name: MYSQL_PASSWORD
+    value: "petclinic"
+  - name: MYSQL_DATABASE
+    value: "petclinic"
